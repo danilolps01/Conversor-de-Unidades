@@ -1,10 +1,23 @@
 const chai = require('chai');
 const expect = chai.expect;
 const request = require('supertest');
+const sinon = require('sinon');
+const axios = require('axios');
 
 const app = require('../index');
 
 describe('API de Conversões', () => {
+
+    before(() => {
+        sinon.stub(axios, "get").resolves({
+            data: { result: 50 }
+        });
+    });
+
+    after(() => {
+        sinon.restore();
+    });
+
     describe('GET /api/moedas', () => {
         it('deve converter USD para BRL com sucesso', async () => {
             const res = await request(app)
@@ -21,6 +34,7 @@ describe('API de Conversões', () => {
             expect(res.status).to.equal(400);
         });
     });
+
     describe('GET /api/temp', () => {
         it('deve converter Celsius para Fahrenheit', async () => {
             const res = await request(app)
