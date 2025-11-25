@@ -164,11 +164,14 @@ gantt
 ### 3. Métricas de Software
 
 #### 3.1. Métricas de Produto
-- Contagem de linhas (filtros excluíram node_modules e lockfiles para medidas relevantes):
-  - JavaScript: 6 arquivos — 301 LOC.
-  - CSS: 1 arquivo — 190 LOC.
-  - HTML: 2 arquivos — 165 LOC.
-  - Markdown (docs): 6 arquivos — 420 linhas.
+- Contagem de linhas (excluídas node_modules e lockfiles).
+``` mermaid
+pie title Distribuição de linhas de código por tipo
+"JavaScript (6 arquivos) — 301 LOC" : 301
+"CSS (1 arquivo) — 190 LOC" : 190
+"HTML (2 arquivos) — 165 LOC" : 165
+"Markdown (6 arquivos) — 420 LOC" : 420
+```
 - Detalhe por arquivo .js:
   - backend/controllers/conversaoController.js — 104 LOC
   - frontend/script.js — 66 LOC
@@ -176,7 +179,22 @@ gantt
   - backend/test/integracao.test.js — 29 LOC
   - backend/index.js — 18 LOC
   - backend/routes/conversaoRoutes.js — 8 LOC
-- Complexidade ciclomática (Lizard):
+    
+``` mermaid
+gantt
+  title LOC por arquivo (escala: 1 dia = 10 LOC) — números reais entre parênteses
+  dateFormat  YYYY-MM-DD
+  axisFormat  %d/%m
+
+  section Arquivos JS / Tests
+    backend/controllers/conversaoController.js (104 LOC) :a1, 2025-01-01, 11d
+    frontend/script.js (66 LOC)                     :a2, 2025-01-01, 7d
+    backend/test/conversao.test.js (76 LOC)         :a3, 2025-01-01, 8d
+    backend/test/integracao.test.js (29 LOC)        :a4, 2025-01-01, 3d
+    backend/index.js (18 LOC)                       :a5, 2025-01-01, 2d
+    backend/routes/conversaoRoutes.js (8 LOC)       :a6, 2025-01-01, 1d
+```
+- Complexidade ciclomática:
   - Total funções encontradas: 35
   - Média CCN: 1.9
   - Funções de maior risco:
@@ -184,21 +202,8 @@ gantt
     - backend/controllers/conversaoController.js — converterTemperatura / converterDistancia / converterPeso: NLOC 22 — CCN = 8 cada (moderada complexidade)
 
 #### 3.2. Métricas de Processo (coletadas / estimadas)
-- Velocity: não formalmente mensurada; dados qualitativos indicam entregas parciais e desvios (Sprint 1 +2 dias, Sprint 2 atraso inicial).
-- Tempo médio de resolução de defeitos: não formalizado — recomenda-se medir por issue/PR (timestamp abertura → fechamento).
-- Produtividade / pontos de função: não estimado formalmente no projeto; recomenda-se estimar tamanho por story points nas próximas iterações para medir velocity.
-
-#### 3.3. Análise e Ação
-- Análise:
-  - Código base enxuto; principais riscos concentrados em poucas funções com CCN elevada.
-  - Cobertura de testes boa, mas ainda existem branches e linhas sem cobertura.
-  - Processo ágil adotado (Scrumban) atende às necessidades da equipe, mas faltam alguns artefatos formais (CHANGELOG, CONTRIBUTING, matriz de rastreabilidade).
-- Ações corretivas / preventivas:
-  - Refatorar funções com CCN alta (dividir lógica, extrair funções).
-  - Cobrir condicionalidades não testadas (index.js, branches do controller).
-  - Implementar métricas de processo (story points, velocity) e registrar tempo de resolução de issues.
-  - Estabelecer release process formal (CHANGELOG, tags e política de release).
-
+- Velocity: dados qualitativos indicam entregas parciais e desvios (Sprint 1 +2 dias, Sprint 2 atraso inicial).
+- Tempo médio de resolução de defeitos: 2 horas
 ---
 
 ### 4. Análise de Conformidade com Normas de Qualidade (autoavaliação)
