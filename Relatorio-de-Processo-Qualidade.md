@@ -195,7 +195,7 @@ Tabela resumida de autoavaliação
 |--------------------|----------------------|----------------|--------------------------------------------|------------------------------------|
 | Gerência de Requisitos | MPS.BR | F (Gerenciado) | Identificar e registrar: Parcial. Rastreabilidade: Parcial. Priorização: Parcial. | README.md, pagina wiki |
 | Garantia da Qualidade (Testes) | MPS.BR | F (Gerenciado) | Planejamento de testes: Parcial. Execução/registro: Atende. Registro/triagem de defeitos: Parcial. | backend/src/tests/ (pasta de testes), Issues #30, #23 |
-| Gerência de Configuração | MPS.BR | F (Gerenciado) | Controle de versão: Atende. Gestão de releases: Não. Identificação de configurações: Parcial. | Uso de git e PRs; ausência de CHANGELOG.md e CONTRIBUTING.md; PRs (ex.: #7, #9) |
+| Gerência de Configuração | MPS.BR | F (Gerenciado) | Controle de versão: Atende. Gestão de releases: Não. Identificação de configurações: Parcial. | Uso de git e PRs; ausência de CHANGELOG.md e CONTRIBUTING.md |
 
 #### 4.1. Gerência de Requisitos — avaliação detalhada
 - Práticas exigidas (nível F): identificar e registrar requisitos; manter rastreabilidade; controlar mudanças; priorizar requisitos.
