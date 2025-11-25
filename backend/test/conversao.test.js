@@ -18,26 +18,37 @@ describe('API de Conversões', () => {
         sinon.restore();
     });
 
-    // ------------------------
-    //  MOEDAS
-    // ------------------------
-    describe('GET /api/moedas', () => {
+     describe('GET /api/moeda', () => {
+
         it('deve converter USD para BRL com sucesso', async () => {
             const res = await request(app)
-                .get('/api/moedas?from=USD&to=BRL&amount=10');
+                .get('/api/moeda?from=USD&to=BRL&amount=10'); 
 
             expect(res.status).to.equal(200);
             expect(res.body).to.have.property('resultado');
+            expect(res.body).to.have.property('from', 'USD');
+            expect(res.body).to.have.property('to', 'BRL');
+            expect(res.body).to.have.property('valor', 10);
         });
 
         it('deve retornar erro se faltar parâmetros', async () => {
             const res = await request(app)
-                .get('/api/moedas?from=USD');
+                .get('/api/moeda?from=USD');
 
             expect(res.status).to.equal(400);
             expect(res.body).to.have.property('error');
         });
-    });
+
+        it('deve retornar erro quando a moeda é inválida', async () => {
+            const res = await request(app)
+                .get('/api/moeda?from=ABC&to=BRL&amount=10');
+
+            expect(res.status).to.equal(400);
+            expect(res.body).to.have.property('error');
+        });
+});
+
+
 
     // ------------------------
     //  TEMPERATURA

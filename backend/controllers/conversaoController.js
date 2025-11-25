@@ -1,41 +1,39 @@
 const axios = require('axios');
 
-async function converterMoeda(req, res) {
+function converterMoeda(req, res) {
     const { from, to, amount } = req.query;
+    const valor = parseFloat(amount);
 
-    if (!from || !to || !amount) {
+    if (!from || !to || isNaN(valor)) {
         return res.status(400).json({
-            error: "Parâmetros faltando. Use: /api/moedas?from=USD&to=BRL&amount=10"
+            error: "Use: /api/moeda?from=USD&to=BRL&amount=10"
         });
     }
 
-    try {
-        const url = `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`;
-        const response = await axios.get(url);
+    const taxas = {
+        USD: 5.00,
+        BRL: 1,
+        EUR: 6.00,
+        GBP: 7.00,
+        JPY: 0.038,
+    };
 
-        const resultado = response?.data?.result;
-
-        if (resultado === undefined || resultado === null) {
-            return res.status(500).json({
-                error: "API externa não retornou resultado válido",
-                detalhes: response.data
-            });
-        }
-
-        return res.json({
-            from,
-            to,
-            amount: Number(amount),
-            resultado
-        });
-
-    } catch (error) {
-        return res.status(500).json({
-            error: "Erro ao buscar taxa de câmbio",
-            detalhes: error.message
-        });
+    if (!taxas[from] || !taxas[to]) {
+        return res.status(400).json({ error: "Moeda inválida" });
     }
+
+    const resultado = (valor * taxas[from]) / taxas[to];
+
+    res.json({
+        tipo: "moeda",
+        from,
+        to,
+        valor,
+        resultado,
+    });
 }
+
+
 
 function converterTemperatura(req, res) {
     const { from, to, value } = req.query;
