@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>API de Conversões — Documentação</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#7c3aed;color-scheme:dark}
+    body{font-family:Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#061021 0%,#071228 100%);color:#e6eef6;margin:0;padding:32px}
+    .wrap{max-width:980px;margin:0 auto}
+    header{display:flex;align-items:center;gap:16px}
+    h1{margin:0;font-size:28px}
+    p.lead{color:var(--muted);margin:6px 0 24px}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:24px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    pre{background:#051025;padding:12px;border-radius:8px;overflow:auto;font-size:13px}
+    code{font-family:source-code-pro,Menlo,Monaco,Consolas,monospace}
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    td,th{padding:8px;text-align:left;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    .muted{color:var(--muted)}
+    a.btn{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--accent);color:white;text-decoration:none}
+    footer{margin-top:24px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>API de Conversões</h1>
+        <p class="lead">Documentação dos endpoints para moedas, temperatura, distância e peso — Node.js + Express</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main class="card">
+
+        <h2>Base</h2>
+        <p class="muted">O servidor roda em: <code>http://localhost:8080</code>. Todas as rotas começam com o prefixo <code>/api</code>.</p>
+
+        <h2>Endpoints</h2>
+
+        <h3>/api/moedas</h3>
+        <p class="muted">Converte valores entre moedas usando <code>exchangerate.host</code> (a chamada é mockada durante os testes).</p>
+        <table>
+          <tr><th>Parâmetro</th><th>Exemplo</th></tr>
+          <tr><td><code>from</code></td><td>USD</td></tr>
+          <tr><td><code>to</code></td><td>BRL</td></tr>
+          <tr><td><code>amount</code></td><td>10</td></tr>
+        </table>
+        <p>Exemplo de requisição:</p>
+        <pre><code>GET /api/moedas?from=USD&to=BRL&amount=10</code></pre>
+        <p>Resposta (200):</p>
+        <pre><code>{
+  "from": "USD",
+  "to": "BRL",
+  "amount": 10,
+  "resultado": 54.23
+}</code></pre>
+
+        <h3>/api/temp</h3>
+        <p class="muted">Converte entre Celsius e Fahrenheit.</p>
+        <table>
+          <tr><th>Parâmetro</th><th>Exemplo</th></tr>
+          <tr><td><code>from</code></td><td>C ou F</td></tr>
+          <tr><td><code>to</code></td><td>F ou C</td></tr>
+          <tr><td><code>value</code></td><td>30</td></tr>
+        </table>
+        <pre><code>GET /api/temp?from=C&to=F&value=30</code></pre>
+        <pre><code>{ "resultado": 86 }</code></pre>
+
+        <h3>/api/dist</h3>
+        <p class="muted">Converte Km ↔ Milhas.</p>
+        <table>
+          <tr><th>Parâmetro</th><th>Exemplo</th></tr>
+          <tr><td><code>from</code></td><td>km ou mi</td></tr>
+          <tr><td><code>to</code></td><td>mi ou km</td></tr>
+          <tr><td><code>value</code></td><td>10</td></tr>
+        </table>
+        <pre><code>GET /api/dist?from=km&to=mi&value=10</code></pre>
+        <pre><code>{ "resultado": 6.21371 }</code></pre>
+
+        <h3>/api/peso</h3>
+        <p class="muted">Converte Kg ↔ Libras.</p>
+        <table>
+          <tr><th>Parâmetro</th><th>Exemplo</th></tr>
+          <tr><td><code>from</code></td><td>kg ou lb</td></tr>
+          <tr><td><code>to</code></td><td>lb ou kg</td></tr>
+          <tr><td><code>value</code></td><td>50</td></tr>
+        </table>
+        <pre><code>GET /api/peso?from=kg&to=lb&value=50</code></pre>
+        <pre><code>{ "resultado": 110.231 }</code></pre>
+
+        <h2>Erros comuns</h2>
+        <ul>
+          <li><strong>400</strong> — Parâmetros faltando ou inválidos.</li>
+          <li><strong>500</strong> — Erro na API externa (moedas) ou erro interno.</li>
+          <li><strong>404</strong> — Rota inexistente (verifique o prefixo <code>/api</code>).</li>
+        </ul>
+
+        <h2>Testes</h2>
+        <p class="muted">A suíte de testes usa <code>mocha</code>, <code>chai</code>, <code>supertest</code> e <code>sinon</code> para mock do <code>axios</code>.</p>
+        <pre><code>NODE_ENV=test npm test</code></pre>
+
+        <h2>Arquivo do controller</h2>
+        <p>Você pode inspecionar a implementação do controller aqui:</p>
+        <p><a class="btn" href="/mnt/data/conversaoController.js" target="_blank">Abrir conversaoController.js</a></p>
+
+      </main>
+
+      <aside class="card">
+        <h3>Resumo rápido</h3>
+        <p class="muted">Prefixo:</p>
+        <pre><code>/api</code></pre>
+        <p class="muted">Rotas:</p>
+        <pre><code>/api/moedas
+/api/temp
+/api/dist
+/api/peso</code></pre>
+
+        <h4>Exemplo cURL</h4>
+        <pre><code>curl "http://localhost:8080/api/moedas?from=USD&to=BRL&amount=1"</code></pre>
+
+        <h4>Dicas</h4>
+        <ul>
+          <li>Use mocks nos testes para chamadas externas (axios)</li>
+          <li>Exporte o <code>app</code> sem iniciar o servidor para testes (NODE_ENV)</li>
+          <li>Padronize respostas JSON com o campo <code>resultado</code></li>
+        </ul>
+
+        <footer>
+          <p>Criado para o projeto Conversor de Unidades — <span class="muted">Node.js + Express</span></p>
+        </footer>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
