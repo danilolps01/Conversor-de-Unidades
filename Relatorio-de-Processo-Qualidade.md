@@ -19,7 +19,8 @@ Sumário
 - Como foi aplicado:
   - Painel Kanban com colunas: Backlog → Não iniciado → Em processo → Em Revisão → Concluído.
   - Uso de Pull Requests e revisão de código antes de mover tarefas para "Concluído".
-  - Entregas/timeboxes aproximadas a cada ~2 semanas (Sprint 1 e Sprint 2).
+
+<img width="1771" height="1056" alt="image" src="https://github.com/user-attachments/assets/e28225fd-551a-4b9d-85a0-20aa0b64784f" />
 
 #### 1.2. Planejamento Ágil
 - Duração do projeto (planejado): 26/10/2025 → 25/11/2025 (~30 dias).
@@ -27,7 +28,7 @@ Sumário
   - Diego Francisco — Backend (implementação do core e testes).
   - Danilo Lopes — Frontend (interface, integração).
   - Gladyson Rhuan — Relatório, integração e QA.
-- Backlog inicial (resumo priorizado):
+- Backlog inicial:
   1. Definir stack e ambiente.
   2. Especificar requisitos funcionais.
   3. Protótipo da interface.
@@ -48,37 +49,15 @@ Sumário
 | Finalização                             | 22/11/2025   | 25/11/2025   | Documentação final e entrega                           |
 
 #### 1.3. Análise de Risco
-Para cada risco: Probabilidade / Impacto / Mitigação / Contingência
 
-1) Atraso no cronograma  
-- Probabilidade: Alta / Impacto: Alto  
-- Mitigação: Dividir tarefas, acompanhamento diário, priorização rígida do backlog.  
-- Contingência: Reduzir escopo para MVP, replanejar entregas ou solicitar extensão.
-
-2) Erros de cálculo / imprecisão no conversor  
-- Probabilidade: Média / Impacto: Alto  
-- Mitigação: Definir requisitos numéricos claros, criar testes unitários e casos de validação desde o início.  
-- Contingência: Documentar limites de precisão e fornecer exemplos de uso; fallback documentado.
-
-3) Falha na integração frontend-backend  
-- Probabilidade: Média / Impacto: Médio-Alto  
-- Mitigação: Contratos de API (JSON schema), testes de integração automatizados, mocks.  
-- Contingência: Fornecer backend mock ou dados estáticos para demonstração.
-
-4) Entrega incompleta / relatório com métricas faltantes  
-- Probabilidade: Média / Impacto: Médio  
-- Mitigação: Checklist do relatório, responsabilidades claras (Gladyson responsável), revisões antecipadas.  
-- Contingência: Preparar resumo executivo mínimo e anexos com métricas essenciais.
-
-5) Recurso humano indisponível  
-- Probabilidade: Baixa-Média / Impacto: Alto  
-- Mitigação: Documentar progresso, pares de revisão, tarefas divididas.  
-- Contingência: Repriorizar backlog e redistribuir tarefas.
-
-6) Problemas de usabilidade na interface  
-- Probabilidade: Média / Impacto: Médio  
-- Mitigação: Revisões rápidas de UX, teste com 1–2 usuários, ajustes iterativos.  
-- Contingência: Simplificar interface e documentar instruções de uso.
+| Risco | Probabilidade | Impacto | Mitigação | Contingência |
+|---|---|---|---|---|
+| Atraso no cronograma | Alta | Alto | Dividir tarefas; acompanhamento diário; priorização rígida do backlog. | Reduzir escopo para MVP; replanejar entregas ou solicitar extensão. |
+| Erros de cálculo / imprecisão no conversor | Média | Alto | Definir requisitos numéricos claros; criar testes unitários e casos de validação desde o início. | Documentar limites de precisão; fornecer exemplos de uso; fallback documentado. |
+| Falha na integração frontend‑backend | Média | Médio‑Alto | Contratos de API (JSON Schema); testes de integração automatizados; uso de mocks. | Fornecer backend mock ou dados estáticos para demonstração. |
+| Entrega incompleta / relatório com métricas faltantes | Média | Médio | Checklist do relatório; responsabilidades claras; revisões antecipadas. | Preparar resumo executivo mínimo e anexos com métricas essenciais. |
+| Recurso humano indisponível | Baixa‑Média | Alto | Documentar progresso; pares de revisão; dividir tarefas. | Repriorizar backlog e redistribuir tarefas. |
+| Problemas de usabilidade na interface | Média | Médio | Revisões rápidas de UX; teste com 1–2 usuários; ajustes iterativos. | Simplificar interface e documentar instruções de uso. |
 
 #### 1.4. Cronograma
 - Cronograma planejado:
