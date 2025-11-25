@@ -68,7 +68,7 @@ Sumário
 - Cronograma real:
 ``` mermaid
 gantt
-  title Cronograma — Planejado vs Real (Scrumban)
+  title Cronograma — Planejado vs Real
   dateFormat  YYYY-MM-DD
   axisFormat  %d/%m
 
@@ -86,7 +86,7 @@ gantt
 
   section Finalização
     Planejado :plan4, 2025-11-22, 2025-11-25
-    Real (previsão de atraso) :real4, 2025-11-25, 2025-11-27
+    Real :real4, 2025-11-24, 2025-11-25
 ```
 - Análise dos desvios:
   - Prioridade na qualidade (correções e testes) provocou atraso sequencial.
@@ -149,7 +149,7 @@ pie title Distribuição de linhas de código por tipo
 "JavaScript (6 arquivos) — 301 LOC" : 301
 "CSS (1 arquivo) — 190 LOC" : 190
 "HTML (2 arquivos) — 165 LOC" : 165
-"Markdown (6 arquivos) — 420 LOC" : 420
+"Markdown (4 arquivos) — 420 LOC" : 420
 ```
 - Detalhe por arquivo .js:
   - backend/controllers/conversaoController.js — 104 LOC
@@ -193,8 +193,8 @@ Foram selecionados 3 processos-chave: Gerência de Requisitos, Garantia da Quali
 Tabela resumida de autoavaliação
 | Processo escolhido | Modelo de Maturidade | Nível avaliado | Avaliação por prática (Atende/Parcial/Não) | Evidências (artefatos/referências) |
 |--------------------|----------------------|----------------|--------------------------------------------|------------------------------------|
-| Gerência de Requisitos | MPS.BR | F (Gerenciado) | Identificar e registrar: Parcial. Rastreabilidade: Parcial. Priorização: Não. | README.md (/backend e /frontend), issues #10, #12, commits 8da119a, 729259a |
-| Garantia da Qualidade (Testes) | MPS.BR | F (Gerenciado) | Planejamento de testes: Parcial. Execução/registro: Não. Registro/triagem de defeitos: Não. | backend/src/tests/ (pasta de testes), logs de execução (16 passing), ausência de plano formal e CI para testes |
+| Gerência de Requisitos | MPS.BR | F (Gerenciado) | Identificar e registrar: Parcial. Rastreabilidade: Parcial. Priorização: Parcial. | README.md, pagina wiki |
+| Garantia da Qualidade (Testes) | MPS.BR | F (Gerenciado) | Planejamento de testes: Parcial. Execução/registro: Atende. Registro/triagem de defeitos: Parcial. | backend/src/tests/ (pasta de testes), Issues #30, #23 |
 | Gerência de Configuração | MPS.BR | F (Gerenciado) | Controle de versão: Atende. Gestão de releases: Não. Identificação de configurações: Parcial. | Uso de git e PRs; ausência de CHANGELOG.md e CONTRIBUTING.md; PRs (ex.: #7, #9) |
 
 #### 4.1. Gerência de Requisitos — avaliação detalhada
@@ -202,55 +202,34 @@ Tabela resumida de autoavaliação
 - Observações:
   - Identificação/registro: funcionalidades documentadas em README e issues, porém não existe um Documento único formal de Requisitos ou backlog com versão controlada → avaliação Parcial.
   - Rastreabilidade: histórico de commits/PRs existe, mas não há matriz que cruza requisito → commit/PR → teste → evidência → Parcial.
-  - Priorização: não existe backlog formal priorizado com critérios documentados → Não atende.
+  - Priorização: existe backlog formal mas não há registro de priorização com critérios documentados → Parcial.
 - Evidências:
-  - README.md (descrição de funcionalidades), issues no repositório (ex.: #10, #12), commits históricos (ex.: 8da119a, 729259a).
+  - README.md, pagina wiki.
 
 #### 4.2. Garantia da Qualidade (Testes)
 - Práticas exigidas (nível F): planejamento básico de verificação/validação; execução e registro; registro e tratamento de defeitos.
 - Observações:
   - Planejamento de testes: existem testes e estrutura de test/ (unit/integration), mas falta um Plano de Testes formalizado → Parcial.
-  - Execução e registro: testes automatizados existem e são executáveis localmente (npm test), mas não há evidência de CI que registre resultados de forma centralizada → Não atende.
-  - Registro/triagem de defeitos: existem issues de bug, mas sem processo documentado para triagem e fechamento → Não atende.
+  - Execução e registro: testes automatizados existem e são executáveis localmente e em CI. Atende.
+  - Registro/triagem de defeitos: existem issues de bug, mas sem processo documentado para triagem e fechamento → Parcial.
 - Evidências:
-  - backend/test/*, relatórios de execução (saída mocha e cobertura), ausência de documento plano_de_testes.md e ausência de histórico de triagem formal.
+  - Issues #30, #23.
 
 #### 4.3. Gerência de Configuração
 - Práticas exigidas (nível F): uso de controle de versão; gestão de releases e registros de mudança; identificação e proteção de configurações.
 - Observações:
   - Controle de versão: Atende — uso de git, histórico, PRs e commits.
   - Gestão de releases: Não atende — não há CHANGELOG.md, tags formais ou processo de release documentado.
-  - Identificação/proteção: Parcial — branches e PRs são usados, mas falta política documentada (CONTRIBUTING.md, proteção de branch, tags).
+  - Identificação/proteção: Parcial — branches e PRs são usados, mas falta política documentada (CONTRIBUTING.md, proteção de branch).
 - Evidências:
-  - Histórico de commits e PRs (ex.: PR #7, #9), ausência de arquivos: CHANGELOG.md, CONTRIBUTING.md, política de branch protection.
-
-#### 4.4. Recomendações de conformidade (ações para subir nível)
-- Gerência de Requisitos:
-  - Criar Documento de Requisitos / backlog formal (arquivo único).
-  - Implementar matriz de rastreabilidade requisito → commit/PR → teste.
-  - Definir critérios de priorização (ex.: MoSCoW ou pontuação).
-- Garantia da Qualidade:
-  - Redigir um Plano de Testes formal.
-  - Integrar testes no CI (ex.: GitHub Actions) e gravar relatórios de execução.
-  - Definir processo de triagem e fechamento de defeitos (issues labels, templates).
-- Gerência de Configuração:
-  - Adotar tags semânticas para releases e manter CHANGELOG.md.
-  - Criar CONTRIBUTING.md e definir política de branch protection.
-  - Automatizar builds e releases (GitHub Actions / semantic-release).
-
+  - Histórico de commits e PRs, ausência de arquivos: CHANGELOG.md, CONTRIBUTING.md, política de branch protection.
 ---
 
-Anexos / Evidências (referências)
-- Estrutura do projeto:
-  - backend/controllers/conversaoController.js
-  - backend/routes/conversaoRoutes.js
-  - backend/test/conversao.test.js
-  - backend/test/integracao.test.js
-  - frontend/script.js
-  - README.md (raiz, backend, frontend)
-- Saída de testes (trecho):
-  - "16 passing (55ms)"
-- Cobertura de código (NYC):
-  - Total: Statements 86.41% | Branches 81.81% | Functions 83.33% | Lines 89.04%
-  - Detalhes em: npm run test:coverage → tabela de cobertura
-- Issues e PRs (exemplos mencionados no projeto): issues #10, #12; PRs #4, #5, #7, #9
+Issues
+https://github.com/1Rhuan/Conversor-de-Unidades/pulls?q=is%3Apr+is%3Aclosed
+
+CI
+https://github.com/1Rhuan/Conversor-de-Unidades/actions
+
+Commits
+https://github.com/1Rhuan/Conversor-de-Unidades/graphs/commit-activity
